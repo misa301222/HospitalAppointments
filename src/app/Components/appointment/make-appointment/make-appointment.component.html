@@ -1,0 +1,202 @@
+<div [@fadeInOnEnter] class="container container-data" *ngIf="isLoggedIn; else notLoggedIn">
+    <h1 class="fw-bold text-center">Make an appointment <fa-icon [icon]="faCalendarAlt"></fa-icon>
+    </h1>
+    <hr>
+
+    <div class="doctor-select container">
+        <form [formGroup]="searchDoctorForm" (ngSubmit)="searchDoctorAppointments()">
+            <div class="row">
+                <div class="col text-end">
+                    <label for="exampleDataList" class="form-label fw-bold"><u>Select a Doctor: </u></label>
+                </div>
+
+                <div class="col">
+                    <input class="form-control" list="datalistOptions" id="exampleDataList"
+                        placeholder="Type to search..." autocomplete="off" name="email"
+                        (change)="onChangeDoctor($event)">
+                    <datalist id="datalistOptions">
+                        <option value="Select a value"></option>
+                        <option *ngFor="let doctor of doctors" [value]="doctor.email">{{doctor.email}}</option>
+                    </datalist>
+                </div>
+                <div class="col">
+                    <button type="submit" [disabled]="!searchDoctorForm.valid"
+                        class="btn btn-light btn-outline-dark">Search</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- CALENDAR START -->
+    <div class="row text-center" *ngIf="isDoctorSelected" [@fadeInOnEnter] [@fadeOutRightOnLeave]>
+        <div class="col-md-4">
+            <div class="btn-group">
+                <div class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate"
+                    (viewDateChange)="closeOpenMonthViewDay()">
+                    Previous
+                </div>
+                <div class="btn btn-outline-secondary" mwlCalendarToday [(viewDate)]="viewDate">
+                    Today
+                </div>
+                <div class="btn btn-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate"
+                    (viewDateChange)="closeOpenMonthViewDay()">
+                    Next
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+        </div>
+        <div class="col-md-4">
+            <div class="btn-group">
+                <div class="btn btn-primary" (click)="setView(CalendarView.Month)"
+                    [class.active]="view === CalendarView.Month">
+                    Month
+                </div>
+                <div class="btn btn-primary" (click)="setView(CalendarView.Week)"
+                    [class.active]="view === CalendarView.Week">
+                    Week
+                </div>
+                <div class="btn btn-primary" (click)="setView(CalendarView.Day)"
+                    [class.active]="view === CalendarView.Day">
+                    Day
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="container container-calendar" *ngIf="isDoctorSelected" [@fadeInOnEnter] [@fadeOutRightOnLeave]>
+        <div [ngSwitch]="view">
+            <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events"
+                [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)"
+                (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
+            </mwl-calendar-month-view>
+            <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="events"
+                [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)"
+                (eventTimesChanged)="eventTimesChanged($event)">
+            </mwl-calendar-week-view>
+            <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="events"
+                [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)"
+                (eventTimesChanged)="eventTimesChanged($event)">
+            </mwl-calendar-day-view>
+        </div>
+    </div>
+
+    <!--
+    <br /><br /><br />
+
+    <h3>
+        Edit events
+        <button class="btn btn-primary float-right" (click)="addEvent()">
+            Add new
+        </button>
+        <div class="clearfix"></div>
+    </h3>
+
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Primary color</th>
+                    <th>Secondary color</th>
+                    <th>Starts at</th>
+                    <th>Ends at</th>
+                    <th>Remove</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let event of events">
+                    <td>
+                        <input type="text" class="form-control" [(ngModel)]="event.title" (keyup)="refresh.next()" />
+                    </td>
+                    <td>
+                        <input type="color" [(ngModel)]="event.color.primary" (change)="refresh.next()" />
+                    </td>
+                    <td>
+                        <input type="color" [(ngModel)]="event.color.secondary" (change)="refresh.next()" />
+                    </td>
+                    <td>
+                        <input class="form-control" type="text" mwlFlatpickr [(ngModel)]="event.start"
+                            (ngModelChange)="refresh.next()" [altInput]="true" [convertModelValue]="true"
+                            [enableTime]="true" dateFormat="Y-m-dTH:i" altFormat="F j, Y H:i" placeholder="Not set" />
+                    </td>
+                    <td>
+                        <input class="form-control" type="text" mwlFlatpickr [(ngModel)]="event.end"
+                            (ngModelChange)="refresh.next()" [altInput]="true" [convertModelValue]="true"
+                            [enableTime]="true" dateFormat="Y-m-dTH:i" altFormat="F j, Y H:i" placeholder="Not set" />
+                    </td>
+                    <td>
+                        <button class="btn btn-danger" (click)="deleteEvent(event)">
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+-->
+
+    <div class="add-appointment" *ngIf="isDoctorSelected" [@fadeInOnEnter] [@fadeOutRightOnLeave]>
+        <h3 class="fw-bold"> Add appointment </h3>
+        <hr>
+        <form [formGroup]="appointmentForm" class="container w-75" (ngSubmit)="addAppointment()">
+            <div class="mb-3">
+                <label for="inputSymptoms" class="form-label fw-bold"><u>Symptoms: </u></label>
+                <textarea id="inputSymptoms" class="form-control" maxLength="150" rows=3
+                    formControlName="symptoms"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="inputDate" class="form-label fw-bold"><u>Date: </u></label>
+                <input type="date" class="form-control" formControlName="dateAppointment" />
+            </div>
+
+            <div class="mb-3">
+                <label for="inputDate" class="form-label fw-bold"><u>Time: </u></label>
+                <input type="time" class="form-control" formControlName="timeAppointment" />
+            </div>
+
+            <div class="mb-3 text-center">
+                <button type="submit" class="btn btn-success">Save Appointment</button>
+            </div>
+
+
+        </form>
+    </div>
+
+    <!-- CALENDAR END -->
+
+    <ng-template #modalContent let-close="close">
+        <div class="modal-header">
+            <h5 class="modal-title">Event action occurred</h5>
+            <button type="button" class="close" (click)="close()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div>
+                Action:
+                <pre>{{ modalData?.action }}</pre>
+            </div>
+            <div>
+                Event:
+                <pre>{{ modalData?.event | json }}</pre>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" (click)="close()">
+                OK
+            </button>
+        </div>
+    </ng-template>
+</div>
+
+<ng-template #notLoggedIn>
+    <div class="container container-data" [@fadeInOnEnter]>
+        <h1 class="text-danger text-center">You're not logged in</h1>
+        <hr>
+        <h6>If you want to log in please click <a [routerLink]="['/login']">here.</a></h6>
+    </div>
+</ng-template>

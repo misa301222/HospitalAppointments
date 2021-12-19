@@ -1,0 +1,22 @@
+.container-data {
+    margin-top: 3em;
+
+    .doctor-select {
+        margin-bottom: 5em;
+        // width: 25em;
+    }
+
+    .container-calendar {
+        color: black !important;
+        width: 70em;
+    }
+
+    .add-appointment{
+        margin-top: 5em;
+        margin-bottom: 15em;
+
+        textarea{
+            resize: none;
+        }
+    }
+}
