@@ -98,8 +98,6 @@ export class ShowAppointmentComponent implements OnInit {
               this.editFormSchedule.controls['friday'].setValue(this.doctorSchedule.friday == true ? 1 : 0);
               this.editFormSchedule.controls['saturday'].setValue(this.doctorSchedule.saturday == true ? 1 : 0);
               this.editFormSchedule.controls['sunday'].setValue(this.doctorSchedule.sunday == true ? 1 : 0);
-
-              console.log(this.doctorSchedule);
             });
 
           }
