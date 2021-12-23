@@ -147,7 +147,7 @@ export class MakeAppointmentComponent implements OnInit {
             this.events = [...this.events, {
               start: doc.data().date.toDate(),
               end: moment(doc.data().date.toDate(), 'hh:mm').add(30, 'm').toDate(),
-              title: doc.data().description + ' [ ' + moment(doc.data().date.toDate()).format('HH:mm') + ' - ' + moment(doc.data().date.toDate(), 'hh:mm').add(30, 'm').format('hh:mm') + ']',
+              title: doc.data().description + ' [ ' + moment(doc.data().date.toDate()).format('HH:mm') + ' - ' + moment(doc.data().date.toDate(), 'hh:mm').add(30, 'm').format('hh:mm') + '] -- ' + doc.data().email,
               color: (doc.data().status === "Accepted" ? this.colors.blue : doc.data().status === "Pending" ? this.colors.yellow : ''),
               actions: this.actions,
             }];
@@ -193,6 +193,7 @@ export class MakeAppointmentComponent implements OnInit {
         }
       );
 
+      let isBetween: boolean = false;
       if (isInSchedule) {
         for (let i = 0; i < this.events.length; i++) {
           //SAME DAY
@@ -201,31 +202,29 @@ export class MakeAppointmentComponent implements OnInit {
             let timeEnd = moment(this.events[i].end, 'hh:mm');
 
             if (moment(date, 'hh:mm').isBetween(timeStart, timeEnd.subtract(1, 'm'))) {
+              isBetween = true;
               Swal.fire({
                 icon: 'warning',
                 title: 'There\'s not available appointments at that time or date. Please try again.',
                 showConfirmButton: true,
               });
             }
-          }
-          // if(date.isBetween(this.events[i].start, this.events[i].end)){
-
-          // }
+          }          
         }
 
-        /*
-        this.appointmentService.saveAppointment(userEmail, this.id, symptoms, dateAppointment, timeAppointment).then(response => {
-          this.appointmentForm.controls['symptoms'].setValue('');
-          this.appointmentForm.controls['dateAppointment'].setValue('');
-          this.appointmentForm.controls['timeAppointment'].setValue('');
-  
-          Swal.fire({
-            icon: 'success',
-            title: 'Appointment made Successfully, please wait for confirmation :]',
-            showConfirmButton: true,
+        if (!isBetween) {
+          this.appointmentService.saveAppointment(userEmail, this.id, symptoms, dateAppointment, timeAppointment).then(response => {
+            this.appointmentForm.controls['symptoms'].setValue('');
+            this.appointmentForm.controls['dateAppointment'].setValue('');
+            this.appointmentForm.controls['timeAppointment'].setValue('');
+
+            Swal.fire({
+              icon: 'success',
+              title: 'Appointment made Successfully, please wait for confirmation :]',
+              showConfirmButton: true,
+            });
           });
-        });
-        */
+        }
       } else {
         Swal.fire({
           icon: 'warning',

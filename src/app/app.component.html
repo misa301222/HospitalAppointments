@@ -8,19 +8,39 @@
         <div class="d-flex flex-row justify-content-center col">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" [routerLink]="['/home']">Home</a>
+                    <a class="nav-link" aria-current="page" [routerLink]="['/home']">
+                        <fa-icon [icon]="faHome" class="icon-color"></fa-icon> Home
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" [routerLink]="['/show-appointment']" *ngIf="isDoctor">Appointments</a>
+                    <a class="nav-link" aria-current="page" [routerLink]="['/show-appointment']" *ngIf="isDoctor">
+                        <fa-icon [icon]="faCalendar" class="icon-color"></fa-icon> Appointments
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" [routerLink]="['/make-appointment']" *ngIf="!isDoctor">Make An Appointment</a>
+                    <a class="nav-link" aria-current="page" [routerLink]="['/make-appointment']" *ngIf="!isDoctor">
+                        <fa-icon [icon]="faCalendar" class="icon-color"></fa-icon> Make An Appointment
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['/login']" *ngIf="!isLoggedIn">Login</a>
+                    <a class="nav-link" [routerLink]="['/show-doctors']" *ngIf="isLoggedIn">
+                        <fa-icon [icon]="faUserMd" class="icon-color"></fa-icon> Show Doctors
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['/register']" *ngIf="!isLoggedIn">Register</a>
+                    <a class="nav-link" [routerLink]="['/login']" *ngIf="!isLoggedIn">
+                        <fa-icon [icon]="faSignInAlt" class="icon-color"></fa-icon> Login
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/register']" *ngIf="!isLoggedIn">
+                        <fa-icon [icon]="faSignOutAlt" class="icon-color"></fa-icon> Register
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/faq']">
+                        <fa-icon [icon]="faQuestion" class="icon-color"></fa-icon> FAQ
+                    </a>
                 </li>
             </ul>
         </div>
@@ -28,10 +48,19 @@
         <div class="col d-flex justify-content-end">
             <ul *ngIf="isLoggedIn" class="navbar-nav">
                 <li class="nav-item">
-                    <h6 class="email">{{emailToShow}}</h6>
+                    <a class="nav-link active" [routerLink]="['/show-about-me']" aria-current="page">
+                        <fa-icon [icon]="faEnvelope" class="icon-color"></fa-icon> {{emailToShow}}
+                    </a>
+                </li>
+                <li class="nav-item" *ngIf="isLoggedIn && isUser">
+                    <a class="nav-link active" aria-current="page" [routerLink]="['/my-appointments']">
+                        <fa-icon [icon]="faCalendarCheck" class="icon-color"></fa-icon> My Appointments
+                    </a>
                 </li>
                 <li class="nav-item" *ngIf="isAdmin">
-                    <a class="nav-link active" aria-current="page" [routerLink]="['/admin-tools']">Admin Tools</a>
+                    <a class="nav-link active" aria-current="page" [routerLink]="['/admin-tools']">
+                        <fa-icon [icon]="faToolbox" class="icon-color"></fa-icon> Admin Tools
+                    </a>
                 </li>
                 <li class="nav-item">
                     <button (click)="logout()" class="btn btn-danger">Log out</button>

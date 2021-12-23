@@ -1,0 +1,51 @@
+<div class="container container-data" [@fadeInOnEnter]>
+    <div class="header">
+        <h1 class="fw-bold text-center">Create Users</h1>
+    </div>
+    <hr>
+
+    <div class="create-user-container container d-flex flex-row justify-content-center">
+        <div class="card w-75">
+            <div class="card-body shadow-card">
+                <form [formGroup]="createUserForm" (ngSubmit)="onSubmit()" class="container">
+                    <div class="mb-3 row">
+                        <label for="inputFullName" class="col-sm-2 col-form-label">Full Name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputFullName" formControlName="name">
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputEmail" formControlName="email">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" id="inputPassword" formControlName="password">
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="selectRole" class="col-sm-2 col-form-label">Role</label>
+                        <div class="col-sm-10">
+                            <select id="selectRole" class="form-control" formControlName="role"
+                                (change)="onChangeRole($event)">
+                                <option value="">Please choose an option</option>
+                                <option value="user">User</option>
+                                <option value="doctor">Doctor</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mb-3 text-center">
+                        <button type="submit" class="btn btn-light btn-outline-dark" [disabled]="!createUserForm.valid">Create User!</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -19,17 +19,27 @@ nav {
     }
 }
 
+.container-data{
+    margin-top: 3em;
+    margin-bottom: 15em;
+}
+
+.list-group-item {
+    background-color: #292b2c !important;
+    color: white !important; 
+}
+
 .card {
     background-color: #111111 !important;
-    border-color: white !important;
+    // border-color: white !important;
     color: white;
 
     .card-header {
-        background-color: #3c3c3c !important;
+        background-color: #292b2c !important;
     }
 
     .card-footer {
-        background-color: #3c3c3c !important;
+        background-color: #292b2c !important;
     }
 
     .form-control {
@@ -37,6 +47,10 @@ nav {
         color: white !important;
         border-color: #0a3fb1 !important;
     }
+}
+
+.shadow-card {
+    box-shadow: 0 .125rem .25rem rgba(#FFFFFF, .175) !important;
 }
 
 .form-control {

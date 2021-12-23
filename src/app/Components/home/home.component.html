@@ -1,7 +1,45 @@
 <div [@fadeInOnEnter] class="container container-data">
     <div class="header text-center">
-        <h1 class="fw-bold"><fa-icon [icon]="faHeartBeat" class="text-danger"></fa-icon> Hospital Appointments</h1>
+        <h1 class="fw-bold">
+            <fa-icon [icon]="faHeartBeat" class="text-danger"></fa-icon> Hospital Appointments
+        </h1>
         <hr>
-        <img src="././assets/resources/images/Heart.png" alt="heartHospital" class="heart-image"/> 
+        <img src="././assets/resources/images/Heart.png" alt="heartHospital" class="heart-image" />
+    </div>
+
+    <div class="container container-detail">
+        <h3 class="fw-bold text-center">Welcome to <fa-icon [icon]="faHeartBeat" class="text-danger"></fa-icon> Hospital
+            Appointments</h3>
+
+        <div class="container container-pic">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="d-flex flex-column align-items-center">
+                        <img src="././assets/resources/images/Doctor.png" alt="doctorPhoto" class="doctor-image w-75" />
+                        <br>
+                        <small class="fw-bold text-muted fst-italic">Drawing of Doctor from Harvard.</small>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <h5 class="text-center">Welcome to <fa-icon [icon]="faHeartBeat" class="text-danger"></fa-icon>
+                        Hospital Appointments </h5>
+                    <hr>
+                    <p>Here you can get an appointment from the best qualified doctors in the field. All graduated
+                        from
+                        Harvard. For Security reasons, in order
+                        to make an appointment you need to create an account first!
+                    </p>
+                    <div class="info text-center">
+                        <small class="fw-bold text-muted fst-italic">If you want to create an account you can click
+                            <a [routerLink]="['/register']"> here.</a></small><br>
+                        <small class="fw-bold text-muted fst-italic">If you want have questions you can check our
+                            FAQ
+                            section in <a [routerLink]="['/register']"> here.</a></small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>

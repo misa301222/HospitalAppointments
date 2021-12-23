@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { UserInterface } from 'src/app/Models/user-interface';
 import { map } from 'rxjs/operators';
+import { AboutMe } from '../Models/about-me';
 
 @Injectable()
 export class AuthService {
@@ -14,7 +15,9 @@ export class AuthService {
       this.afsAuth.createUserWithEmailAndPassword(email, pass)
         .then(userData => {
           resolve(userData),
-            this.updateUserData(userData.user, fullName)
+            this.updateUserData(userData.user, fullName),
+            resolve(userData),
+            this.createBlankAboutMeSection(userData.user);
         }).catch(err => console.log(reject(err)))
     });
   }
@@ -61,6 +64,47 @@ export class AuthService {
     console.log(data);
 
     return userRef.set(data, { merge: true })
+  }
+
+  createUser(email: string, pass: string, fullName: string, roles: any) {
+    return new Promise((resolve, reject) => {
+      this.afsAuth.createUserWithEmailAndPassword(email, pass)
+        .then(userData => {
+          resolve(userData),
+            this.updateCreatedUser(userData.user, fullName, roles),
+            resolve(userData),
+            this.createBlankAboutMeSection(userData.user);
+        }).catch(err => console.log(reject(err)))
+    });
+  }
+
+  private updateCreatedUser(user: any, fullName: string, roles: any) {
+    const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
+    const data: UserInterface = {
+      id: user.uid,
+      name: fullName,
+      email: user.email,
+      roles: roles
+    }
+    return userRef.set(data, { merge: true })
+  }
+
+  private createBlankAboutMeSection(user: any) {
+    const documentId = this.afs.createId();
+    const data: AboutMe = {
+      id: documentId,
+      userId: user.uid,
+      imageURL: '',
+      descriptionHeader: 'This is a placeholder for header',
+      description: 'This is a placeholder for description',
+      education: [''],
+      hobbies: [''],
+      location: 'Location',
+      phoneNumber: '123456',
+      aditionalInfo: '...',
+    }
+
+    return this.afs.doc(`about-me/${documentId}`).set(data);
   }
 
 

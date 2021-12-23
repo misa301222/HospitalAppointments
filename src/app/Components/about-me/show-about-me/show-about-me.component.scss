@@ -1,0 +1,67 @@
+.container-data {
+    .image-thumbnail {
+        width: 20em;
+        border-radius: 13px;
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .image-thumbnail:hover {
+        transform: scale(1.05);
+    }
+
+    .doctor-info-container {
+        .doc-data {
+            padding-top: 3em;
+            padding-bottom: 1em;
+            background-color: #0c0c0c;
+            border-radius: 13px;
+            .doctor-data {
+                .icono {
+                    width: 1.5em;
+                    font-size: 2em;
+                    background-color: white;
+                    color: #716f81;
+                    border-radius: 23px;
+                }
+
+                .icono-hobby {
+                    width: 1.5em;
+                    font-size: 2em;
+                    background-color: white;
+                    color: #b97a95;
+                    border-radius: 23px;
+                }
+
+                .icono-phone {
+                    width: 1.5em;
+                    font-size: 2em;
+                    background-color: white;
+                    color: #c7b198;
+                    border-radius: 23px;
+                }
+
+                .icono-email {
+                    width: 1.5em;
+                    font-size: 2em;
+                    background-color: white;
+                    color: #f6ae99;
+                    border-radius: 23px;
+                }
+
+                li {
+                    list-style-type: none;
+                }
+            }
+        }
+    }
+
+    .card-aditional-info {
+        margin-top: 13em;
+        transform: rotate(-10deg);
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .card-aditional-info:hover {
+        transform: rotate(0deg);
+    }
+}

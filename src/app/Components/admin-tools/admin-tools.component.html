@@ -1,3 +1,48 @@
-<div [@fadeInOnEnter] class="container">
-    <a [routerLink]="['/show-users']">Users!</a>
+<div [@fadeInOnEnter] class="container container-data">
+    <div class="header text-center">
+        <h1 class="fw-bold">Admin Tools <fa-icon [icon]="faUserCog" class=""></fa-icon></h1>
+    </div>
+    <hr>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 panel">
+                <br>
+                <div class="accordion accordion-flush" id="accordionFlushExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingOne">                            
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#flush-collapseOne" aria-expanded="false"
+                                aria-controls="flush-collapseOne">
+                                <fa-icon [icon]="faUsers" class=""></fa-icon>&nbsp;Users 
+                            </button>
+                        </h2>
+                        <div id="flush-collapseOne" class="accordion-collapse collapse"
+                            aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body"><a [routerLink]="['/create-users']">Create Users</a><br>
+                                <small class="text-muted fw-bold">- Create users with multiple roles</small>
+                            </div>
+                        </div>
+
+                        <div id="flush-collapseOne" class="accordion-collapse collapse"
+                            aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body"><a [routerLink]="['/show-users']">Show All Users</a><br>
+                                <small class="text-muted fw-bold">- Show all users</small>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="col-sm-6 panel">
+                12346
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            New Row
+        </div>
+    </div>
 </div>

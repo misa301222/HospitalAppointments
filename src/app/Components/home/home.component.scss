@@ -7,4 +7,17 @@
         height: 35em;
         width: auto;
     }
+
+    .container-detail {
+        margin-top: 3em;
+
+        .doctor-image {
+            height: 20em;
+            border-radius: 13px;
+        }
+
+        .container-pic {
+            margin-top: 3em;
+        }
+    }
 }

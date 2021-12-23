@@ -1,7 +1,7 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
-import { faHeartbeat } from '@fortawesome/free-solid-svg-icons';
+import { faCalendar, faCalendarCheck, faEnvelope, faHeartbeat, faHome, faQuestion, faSignInAlt, faSignOutAlt, faToolbox, faUserMd } from '@fortawesome/free-solid-svg-icons';
 import Swal from 'sweetalert2';
 import { AuthService } from './Core/auth.service';
 
@@ -9,11 +9,20 @@ import { AuthService } from './Core/auth.service';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  // encapsulation: ViewEncapsulation.None
 })
 export class AppComponent {
-  title = 'HospitalAppointments';
+  title = 'Hospital Appointments';
   faHeartBeat = faHeartbeat;
+  faHome = faHome;
+  faCalendar = faCalendar;
+  faUserMd = faUserMd;
+  faSignInAlt = faSignInAlt;
+  faSignOutAlt = faSignOutAlt;
+  faToolbox = faToolbox;
+  faEnvelope = faEnvelope;
+  faCalendarCheck = faCalendarCheck;
+  faQuestion = faQuestion;
 
   isLoggedIn: boolean = false;
   emailToShow: string = '';

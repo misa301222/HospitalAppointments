@@ -45,8 +45,8 @@ export class AppointmentService {
     return this.firestore.collection('appointment', ref => ref.where('doctorId', '==', id)).get();
   }
 
-  getDoctorByDoctorId(doctorId: string) {
-    return this.firestore.collection('appointment', ref => ref.where('doctorId', '==', doctorId)).get();
+  getAppointmentsByDoctorId(doctorId: string) {
+    return this.firestore.collection('appointment', ref => ref.where('doctorId', '==', doctorId).orderBy('date', 'desc')).get();
   }
 
   getDoctorScheduleByDoctorId(doctorId: string) {
