@@ -1,15 +1,24 @@
 .container-data {
     margin-top: 3em;
 
-    .heart-image {
-        margin-top: 2em;
-        border-radius: 13px;
-        height: 35em;
-        width: auto;
+    .banner {
+        background-color: gray;
+        .heart-image {
+            // margin-top: 2em;
+            // border-radius: 13px;
+            height: 30em;
+            width: auto;
+        }
+
+        .heart-logo {
+            width: 8em;
+            // opacity: 0.5;
+            filter: brightness(80%);
+        }
     }
 
     .container-detail {
-        margin-top: 3em;
+        margin-top: 5em;
 
         .doctor-image {
             height: 20em;
@@ -18,6 +27,47 @@
 
         .container-pic {
             margin-top: 3em;
+        }
+    }
+
+    .container-about-hospital {
+        margin-top: 5em;
+
+        .banner-white {
+            background-color: gray;
+            .building-image {
+                width: 40em;
+            }
+        }
+    }
+
+    #pills-tab {
+        background-color: white !important;
+        border-radius: 13px;
+    }
+
+    .tab-content {
+        .building2-image {
+            width: 30em;
+            border-radius: 13px;
+        }
+
+        .text {
+            background-color: white;
+        }
+
+        .doctor3-image {
+            width: 23em;
+            border-radius: 13px;
+        }
+
+        .statue-image {
+            width: 37em;
+        }
+
+        .card {
+            background-color: white !important;
+            color: black !important;
         }
     }
 }

@@ -13,7 +13,7 @@
     <div class="container-doctors">
         <div class="header">
             <div class="header-image d-flex flex-row">
-                <img src="././assets/resources/images/Doctor2.png" alt="doctorPhoto" class="doctor-image" />
+                <img src="././assets/resources/images/Doctor2.png" alt="doctorPhoto" class="doctor-image shadow-lg" />
                 <div class="text">
                     <br>
                     <div class="container w-75 d-flex flex-column">
@@ -28,7 +28,7 @@
                         <p class="fw-bolder text-wrap text-dark">We really worry about your
                             health, if
                             you still have any
-                            question please check our <a class="">FAQ section</a> or
+                            question please check our <a [routerLink]="['/faq']">FAQ section</a> or
                             send an email to Hospital@gmail.com
                         </p>
 
@@ -46,9 +46,9 @@
             <ul>
                 <div class="d-flex align-items-center doctor-card" *ngFor="let doctor of doctorList; index as i">
                     <div class="flex-shrink-0">
-                        <img src="{{aboutMeList[i].imageURL}}" alt="profileImage" class="thumbnail"
+                        <img src="{{aboutMeList[i].imageURL}}" alt="profileImage" class="thumbnail shadow-lg"
                             *ngIf="aboutMeList[i].imageURL">
-                        <img src="././assets/resources/images/Blank.png" alt="profileImage" class="thumbnail"
+                        <img src="././assets/resources/images/Blank.png" alt="profileImage" class="thumbnail shadow-lg"
                             *ngIf="!aboutMeList[i].imageURL">
                     </div>
                     <div class="flex-grow-1 ms-3">

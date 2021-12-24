@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faHeartbeat } from '@fortawesome/free-solid-svg-icons';
+import { faBoxes, faHeartbeat, faStar } from '@fortawesome/free-solid-svg-icons';
 import { fadeInOnEnterAnimation } from 'angular-animations';
 import { AuthService } from 'src/app/Core/auth.service';
 
@@ -11,8 +11,9 @@ import { AuthService } from 'src/app/Core/auth.service';
 })
 export class HomeComponent implements OnInit {
 
-  //ICONS
   faHeartBeat = faHeartbeat;
+  faStar = faStar;
+  faBoxes = faBoxes;
 
   canEdit: boolean = false;
   isLoggedIn: boolean = false;

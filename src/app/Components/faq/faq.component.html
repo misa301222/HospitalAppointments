@@ -1,8 +1,62 @@
-<div class="container container-data">
+<div class="container container-data" [@fadeInOnEnter]>
 
     <div class="header">
-        <h1 class="text-center fw-bold">FAQ</h1>
+        <h1 class="text-center fw-bold">FAQ <fa-icon [icon]="faQuestionCircle"></fa-icon></h1>
     </div>
     <hr>
+
+    <div class="container ">
+        <div class="accordion accordion-flush" id="accordionFlushExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingOne">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                        <h6>Where can i create an account?</h6>
+                    </button>
+                </h2>
+                <div id="flush-collapseOne" class="accordion-collapse collapse text-dark"
+                    aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                        <p>You can create an account by clicking <a [routerLink]="['/register']">here.</a></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                        <h6>How can i make an appointment?</h6>
+                    </button>
+                </h2>
+                <div id="flush-collapseTwo" class="accordion-collapse collapse text-dark"
+                    aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                        <p>First you need to create an account. Then you need to go <a [routerLink]="['/make-appointment']">make
+                                an appointmnet</a> section. There
+                            you can select from all our doctors.</p>
+                        <small class="text-muted">You can only make an appointment if the doctor has availability in the
+                            day and time desired.</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                        <h6>Can i edit my profile data?</h6>
+                    </button>
+                </h2>
+                <div id="flush-collapseThree" class="accordion-collapse collapse text-dark"
+                    aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                        <p>Yes! You only need to go to your <a [routerLink]="['/show-about-me']">profile.</a> There you can edit all the info.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
 
 </div>
