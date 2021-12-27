@@ -4,15 +4,12 @@
     .banner {
         background-color: gray;
         .heart-image {
-            // margin-top: 2em;
-            // border-radius: 13px;
             height: 30em;
             width: auto;
         }
 
         .heart-logo {
             width: 8em;
-            // opacity: 0.5;
             filter: brightness(80%);
         }
     }
@@ -46,6 +43,16 @@
         border-radius: 13px;
     }
 
+    .nav-pills .nav-link {
+        color: black !important;
+    }
+
+    .nav-pills .nav-link.active,
+    .nav-pills .show > .nav-link {
+        color: white !important;
+        background-color: gray;
+    }
+
     .tab-content {
         .building2-image {
             width: 30em;
@@ -68,6 +75,40 @@
         .card {
             background-color: white !important;
             color: black !important;
+        }
+
+        .teamwork-image {
+            width: 45em;
+        }
+
+        .timeline {
+            margin-top: 5em;
+            padding-top: 3em;
+            padding-bottom: 3em;
+            background-color: white;
+            border-radius: 13px;
+
+            .hr-dark {
+                color: black;
+            }
+
+            .history-icon {
+                font-size: 3em;
+                color: black;
+            }
+
+            .renglon {
+                border-bottom: black 0.1em dashed;
+                .timeline-date {
+                    background-color: white;
+                    color: black;
+                    border-radius: 13px;
+                }
+            }
+
+            .data-info {
+                padding: 1em;
+            }
         }
     }
 }

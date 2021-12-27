@@ -4,11 +4,21 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat
 import { UserInterface } from 'src/app/Models/user-interface';
 import { map } from 'rxjs/operators';
 import { AboutMe } from '../Models/about-me';
+import { UserService } from '../services/user.service';
 
 @Injectable()
 export class AuthService {
 
-  constructor(private afsAuth: AngularFireAuth, private afs: AngularFirestore) { }
+  roles: string[] = [];
+  isLoggedIn: boolean = false;
+  emailToShow: string = '';
+  isAdmin: any = null;
+  isDoctor: any = null;
+  isUser: any = null;
+  userUid: string = '';
+  userName: string = '';
+
+  constructor(private afsAuth: AngularFireAuth, private afs: AngularFirestore, private userService: UserService) { }
 
   registerUser(email: string, pass: string, fullName: string) {
     return new Promise((resolve, reject) => {
@@ -17,30 +27,34 @@ export class AuthService {
           resolve(userData),
             this.updateUserData(userData.user, fullName),
             resolve(userData),
-            this.createBlankAboutMeSection(userData.user);
+            this.createBlankAboutMeSection(userData.user),
+            this.getCurrentUser();
         }).catch(err => console.log(reject(err)))
     });
   }
 
   loginEmailUser(email: string, pass: string) {
     return new Promise((resolve, reject) => {
-      this.afsAuth.signInWithEmailAndPassword(email, pass)
-        .then(userData => resolve(userData),
-          err => reject(err));
+      this.afsAuth.signInWithEmailAndPassword(email, pass).then(userData => {
+        resolve(userData),
+          this.getUserRoles(email);
+      },
+        err => reject(err));
     });
   }
 
-  // loginFacebookUser() {
-  //   return this.afsAuth.signInWithPopup(new FacebookAuthProvider())
-  //     .then(credential => this.updateUserData(credential.user))
-  // }
-
-  // loginGoogleUser() {
-  //   return this.afsAuth.signInWithPopup(new GoogleAuthProvider())
-  //     .then(credential => this.updateUserData(credential.user))
-  // }
+  getUserRoles(email: string) {
+    this.userService.getUserIdByEmailOther(email).subscribe(querySnap => {
+      querySnap.forEach((doc: any) => {
+        this.roles = doc.data().roles;
+      });
+      localStorage.setItem('roles', JSON.stringify(this.roles));
+      this.getCurrentUser();
+    });
+  }
 
   logoutUser() {
+    this.userUid = "";
     return this.afsAuth.signOut();
   }
 
@@ -60,9 +74,6 @@ export class AuthService {
         doctor: false
       }
     }
-
-    console.log(data);
-
     return userRef.set(data, { merge: true })
   }
 
@@ -103,7 +114,6 @@ export class AuthService {
       phoneNumber: '123456',
       aditionalInfo: '...',
     }
-
     return this.afs.doc(`about-me/${documentId}`).set(data);
   }
 
@@ -112,5 +122,37 @@ export class AuthService {
     return this.afs.doc<UserInterface>(`users/${userUid}`).valueChanges();
   }
 
+  async getCurrentUser() {
+    console.log('getcurrent');
+    await this.isAuth().subscribe((auth: any) => {
+      if (auth?.uid) {
+        console.log('if');
+        this.emailToShow = auth.email ? auth.email.toString() : '';
+        localStorage.setItem('email', this.emailToShow);
+        this.isLoggedIn = true;
+        localStorage.setItem('isLoggedIn', JSON.stringify(this.isLoggedIn));
+        this.userUid = auth.uid;
+        this.getRoles();
+      } else {
+        console.log('else');
+        this.isLoggedIn = false;
+        localStorage.setItem('isLoggedIn', JSON.stringify(this.isLoggedIn));
+      }
+    });
+  }
+
+  async getRoles() {
+    await this.isUserAdmin(this.userUid).subscribe(userRole => {
+      if (this.userUid) {
+        this.isAdmin = userRole?.roles.administrator == true ? true : false;
+        this.isDoctor = userRole?.roles.doctor == true ? true : false;
+        this.isUser = userRole?.roles.user == true ? true : false;
+
+        localStorage.setItem('isAdmin', JSON.stringify(this.isAdmin));
+        localStorage.setItem('isDoctor', JSON.stringify(this.isDoctor));
+        localStorage.setItem('isUser', JSON.stringify(this.isUser));
+      }
+    });
+  }
 
 }

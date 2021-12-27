@@ -46,6 +46,7 @@ export class ShowDoctorsComponent implements OnInit {
         this.aboutMeList.push({
           ...doc.data()
         });
+        console.log(this.aboutMeList);
       });
     });
   }

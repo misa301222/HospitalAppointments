@@ -256,25 +256,25 @@ export class ShowAppointmentComponent implements OnInit {
           this.appointmentService.getAppointmentByAppointmentId(appointment.id).subscribe(querySnap => {
             querySnap.forEach((doc: any) => {
               doc.ref.delete();
-            })
+            });
+            Swal.fire(
+              'Deleted!',
+              'Your file has been deleted.',
+              'success'
+            );
+            this.appointmentList = [];
+            this.appointmentService.getAppointmentsByDoctorId(this.doctorUid).subscribe(querySnap => {
+              querySnap.forEach((doc: any) => {
+                this.appointmentList.push({
+                  id: doc.id,
+                  ...doc.data(),
+                  date: doc.data().date.toDate(),
+                });
+              });
+            });
           });
         }
-        Swal.fire(
-          'Deleted!',
-          'Your file has been deleted.',
-          'success'
-        );
       }
-      this.appointmentList = [];
-      this.appointmentService.getAppointmentsByDoctorId(this.doctorUid).subscribe(querySnap => {
-        querySnap.forEach((doc: any) => {
-          this.appointmentList.push({
-            id: doc.id,
-            ...doc.data(),
-            date: doc.data().date.toDate(),
-          });
-        });
-      });
     });
 
   }

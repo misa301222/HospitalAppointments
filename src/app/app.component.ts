@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { faCalendar, faCalendarCheck, faEnvelope, faHeartbeat, faHome, faQuestion, faSignInAlt, faSignOutAlt, faToolbox, faUserMd } from '@fortawesome/free-solid-svg-icons';
 import Swal from 'sweetalert2';
@@ -8,8 +7,7 @@ import { AuthService } from './Core/auth.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
-  // encapsulation: ViewEncapsulation.None
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   title = 'Hospital Appointments';
@@ -24,40 +22,37 @@ export class AppComponent {
   faCalendarCheck = faCalendarCheck;
   faQuestion = faQuestion;
 
-  isLoggedIn: boolean = false;
-  emailToShow: string = '';
-  isAdmin: any = null;
-  isDoctor: any = null;
-  isUser: any = null;
-  userUid: string = '';
-  userName: string = '';
-
-  constructor(private authService: AuthService, private afsAuth: AngularFireAuth, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
-    this.getCurrentUser();
   }
 
-  getCurrentUser() {
-    this.authService.isAuth().subscribe(auth => {
-      if (auth) {
-        this.emailToShow = auth.email ? auth.email.toString() : '';
-        localStorage.setItem('email', this.emailToShow);
-        this.isLoggedIn = true;
-        this.userUid = auth.uid;
-        this.authService.isUserAdmin(this.userUid).subscribe(userRole => {
-          this.isAdmin = userRole?.roles.administrator == true ? true : false;
-          this.isDoctor = userRole?.roles.doctor == true ? true : false;
-          this.isUser = userRole?.roles.user == true ? true : false;
-        });
-      } else {
-        this.isLoggedIn = false;
-      }
-    });
+  get isDoctor(): boolean {
+    return localStorage.getItem('isDoctor') === 'true' ? true : false;
+  }
+
+  get isAdmin(): boolean {
+    return localStorage.getItem('isAdmin') === 'true' ? true : false;
+  }
+
+  get isUser(): boolean {
+    return localStorage.getItem('isUser') === 'true' ? true : false;
+  }
+
+  get isLoggedIn(): boolean {
+    return localStorage.getItem('isLoggedIn') === 'true' ? true : false;
+  }
+
+  get emailToShow(): string {
+    return localStorage.getItem('email') || '{}';
   }
 
   isAuth() {
     return this.authService.isAuth();
+  }
+
+  logout() {
+    this.showSuccessLogoutSwal();
   }
 
   showSuccessLogoutSwal() {
@@ -70,16 +65,15 @@ export class AppComponent {
     }).then(res => {
       localStorage.removeItem('email');
       localStorage.removeItem('isLoggedIn');
-      this.isAdmin = null;
-      this.isDoctor = null;
-      this.isUser = null;
-      this.afsAuth.signOut();
+      localStorage.removeItem('roles');
+      localStorage.removeItem('isAdmin');
+      localStorage.removeItem('isDoctor');
+      localStorage.removeItem('isUser');
+      this.authService.logoutUser();
       this.router.navigate(['/login']);
     });
   }
 
-  logout() {
-    this.showSuccessLogoutSwal();
-  }
+
 
 }

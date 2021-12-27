@@ -32,6 +32,8 @@ import { CreateUsersComponent } from './Components/users/create-users/create-use
 import { ShowAboutMeComponent } from './Components/about-me/show-about-me/show-about-me.component';
 import { EditAboutMeComponent } from './Components/about-me/edit-about-me/edit-about-me.component';
 import { FaqComponent } from './Components/faq/faq.component';
+import { PageNotFoundComponent } from './Components/page-not-found/page-not-found.component';
+import { AboutThisAppComponent } from './Components/about-this-app/about-this-app.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,9 @@ import { FaqComponent } from './Components/faq/faq.component';
     CreateUsersComponent,
     ShowAboutMeComponent,
     EditAboutMeComponent,
-    FaqComponent
+    FaqComponent,
+    PageNotFoundComponent,
+    AboutThisAppComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

@@ -18,7 +18,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" [routerLink]="['/make-appointment']" *ngIf="!isDoctor">
+                    <a class="nav-link" aria-current="page" [routerLink]="['/make-appointment']" *ngIf="isUser || isAdmin">
                         <fa-icon [icon]="faCalendar" class="icon-color"></fa-icon> Make An Appointment
                     </a>
                 </li>
@@ -52,7 +52,7 @@
                         <fa-icon [icon]="faEnvelope" class="icon-color"></fa-icon> {{emailToShow}}
                     </a>
                 </li>
-                <li class="nav-item" *ngIf="isLoggedIn && isUser">
+                <li class="nav-item" *ngIf="isLoggedIn && isUser || isAdmin">
                     <a class="nav-link active" aria-current="page" [routerLink]="['/my-appointments']">
                         <fa-icon [icon]="faCalendarCheck" class="icon-color"></fa-icon> My Appointments
                     </a>

@@ -12,6 +12,10 @@ export class UserService {
     return this.firestore.collection('users', ref => ref.where('email', '==', localStorage.getItem('email'))).get();
   }
 
+  getUserById(authId: string) {
+    return this.firestore.collection('users', ref => ref.where('id', '==', authId)).get();
+  }
+
   getUserIdByEmailOther(email: string) {
     return this.firestore.collection('users', ref => ref.where('email', '==', email)).get();
   }

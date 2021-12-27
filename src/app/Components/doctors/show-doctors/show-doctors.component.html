@@ -47,9 +47,9 @@
                 <div class="d-flex align-items-center doctor-card" *ngFor="let doctor of doctorList; index as i">
                     <div class="flex-shrink-0">
                         <img src="{{aboutMeList[i].imageURL}}" alt="profileImage" class="thumbnail shadow-lg"
-                            *ngIf="aboutMeList[i].imageURL">
+                            *ngIf="aboutMeList[i]?.imageURL">
                         <img src="././assets/resources/images/Blank.png" alt="profileImage" class="thumbnail shadow-lg"
-                            *ngIf="!aboutMeList[i].imageURL">
+                            *ngIf="!aboutMeList[i]?.imageURL">
                     </div>
                     <div class="flex-grow-1 ms-3">
                         <a [routerLink]="['/show-about-me/', {email : doctor.email}]">{{ doctor.name }} - [{{
