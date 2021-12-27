@@ -1,10 +1,114 @@
 .container-data {
     margin-top: 3em;
 
-    .heart-image {
-        margin-top: 2em;
+    .banner {
+        background-color: gray;
+        .heart-image {
+            height: 30em;
+            width: auto;
+        }
+
+        .heart-logo {
+            width: 8em;
+            filter: brightness(80%);
+        }
+    }
+
+    .container-detail {
+        margin-top: 5em;
+
+        .doctor-image {
+            height: 20em;
+            border-radius: 13px;
+        }
+
+        .container-pic {
+            margin-top: 3em;
+        }
+    }
+
+    .container-about-hospital {
+        margin-top: 5em;
+
+        .banner-white {
+            background-color: gray;
+            .building-image {
+                width: 40em;
+            }
+        }
+    }
+
+    #pills-tab {
+        background-color: white !important;
         border-radius: 13px;
-        height: 35em;
-        width: auto;
+    }
+
+    .nav-pills .nav-link {
+        color: black !important;
+    }
+
+    .nav-pills .nav-link.active,
+    .nav-pills .show > .nav-link {
+        color: white !important;
+        background-color: gray;
+    }
+
+    .tab-content {
+        .building2-image {
+            width: 30em;
+            border-radius: 13px;
+        }
+
+        .text {
+            background-color: white;
+        }
+
+        .doctor3-image {
+            width: 23em;
+            border-radius: 13px;
+        }
+
+        .statue-image {
+            width: 37em;
+        }
+
+        .card {
+            background-color: white !important;
+            color: black !important;
+        }
+
+        .teamwork-image {
+            width: 45em;
+        }
+
+        .timeline {
+            margin-top: 5em;
+            padding-top: 3em;
+            padding-bottom: 3em;
+            background-color: white;
+            border-radius: 13px;
+
+            .hr-dark {
+                color: black;
+            }
+
+            .history-icon {
+                font-size: 3em;
+                color: black;
+            }
+
+            .renglon {
+                border-bottom: black 0.1em dashed;
+                .timeline-date {
+                    background-color: white;
+                    color: black;
+                    border-radius: 13px;
+                }
+            }
+
+            .data-info {
+                padding: 1em;
+            }
+        }
     }
 }

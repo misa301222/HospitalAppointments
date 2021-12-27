@@ -1,0 +1,29 @@
+.container-data {
+    .header-image {
+        background-color: gray;
+        .doctor-image {
+            width: 30em;
+        }
+    }
+    .doctors-list {
+        margin-top: 3em;
+
+        .doctor-card {
+            margin-top: 2em;
+            background-color: white;
+            .thumbnail {
+                width: 10em;
+            }
+
+            a {
+                font-weight: bold;
+                text-decoration: none;
+                transition: color 0.2s ease-in-out;
+            }
+
+            a:hover {
+                color: #dc3545;
+            }
+        }
+    }
+}

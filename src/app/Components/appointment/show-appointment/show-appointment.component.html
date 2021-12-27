@@ -1,5 +1,5 @@
-<div class="container container-data" *ngIf="!isUser">
-    <h1 class="fw-bold text-center">Appointments</h1>
+<div class="container container-data" *ngIf="!isUser" [@fadeInOnEnter]>
+    <h1 class="fw-bold text-center">Appointments <fa-icon [icon]="faCalendar"></fa-icon></h1>
     <hr>
     <div class="schedule-container">
         <div class="card">
@@ -102,7 +102,7 @@
         </div>
     </div>
 
-    <div class="container-appointments" *ngIf="appointmentList.length > 0; else notAppointments">
+    <div class="container-appointments" *ngIf="appointmentList.length > 0; else notAppointments" [@fadeInOnEnter]>
         <div class="card">
             <div class="card-header">
                 <h5 class="text-center fst-italic fw-bold"> Showing all appointments </h5>
@@ -118,6 +118,10 @@
 
                             <th>
                                 Symptoms
+                            </th>
+
+                            <th>
+                                Date
                             </th>
 
                             <th>
@@ -141,13 +145,17 @@
                             </td>
 
                             <td>
+                                {{ appointment.date }}
+                            </td>
+
+                            <td>
                                 {{ appointment.status }}
                             </td>
 
                             <td class="text-center">
                                 <button class="btn btn-light btn-outline-dark"
                                     (click)="editAppointment(modalEditAppointment, appointment)">View </button>
-                                <button class="btn btn-danger">Delete </button>
+                                <button class="btn btn-danger" (click)="deleteAppointment(appointment)">Delete </button>
                             </td>
                         </tr>
                     </tbody>

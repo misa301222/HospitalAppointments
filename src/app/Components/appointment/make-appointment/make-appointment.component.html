@@ -1,5 +1,5 @@
 <div [@fadeInOnEnter] class="container container-data" *ngIf="isLoggedIn; else notLoggedIn">
-    <h1 class="fw-bold text-center">Make an appointment <fa-icon [icon]="faCalendarAlt"></fa-icon>
+    <h1 class="fw-bold text-center">Make an appointment <fa-icon [icon]="faCalendarAlt" class="text-danger"></fa-icon>
     </h1>
     <hr>
 
@@ -65,22 +65,121 @@
         </div>
     </div>
     <br />
-    <div class="container container-calendar" *ngIf="isDoctorSelected" [@fadeInOnEnter] [@fadeOutRightOnLeave]>
-        <div [ngSwitch]="view">
-            <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events"
-                [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)"
-                (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
-            </mwl-calendar-month-view>
-            <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="events"
-                [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)"
-                (eventTimesChanged)="eventTimesChanged($event)">
-            </mwl-calendar-week-view>
-            <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="events"
-                [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)"
-                (eventTimesChanged)="eventTimesChanged($event)">
-            </mwl-calendar-day-view>
+    <div class="container" *ngIf="isDoctorSelected" [@fadeInOnEnter] [@fadeOutRightOnLeave]>
+        <div class="container-calendar container" >
+            <div [ngSwitch]="view">
+                <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events"
+                    [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)"
+                    (eventClicked)="handleEvent('Clicked', $event.event)"
+                    (eventTimesChanged)="eventTimesChanged($event)">
+                </mwl-calendar-month-view>
+                <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="events"
+                    [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)"
+                    (eventTimesChanged)="eventTimesChanged($event)">
+                </mwl-calendar-week-view>
+                <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="events"
+                    [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)"
+                    (eventTimesChanged)="eventTimesChanged($event)">
+                </mwl-calendar-day-view>
+            </div>
+        </div>
+
+        <div class="doctor-schedule-container container" [@fadeInOnEnter]>
+            <div class="header text-center">
+                <h5 class="fw-bold fst-italic">Doctor Schedule</h5>
+            </div>
+            <hr>
+            <div class="container" *ngIf="doctorSchedule.id; else noSchedule" [@fadeInOnEnter]>
+                <div class="card shadow-card">
+                    <div class="card-body">
+                        <table class="table table-bordered text-light table-dark">
+                            <thead class="text-center">
+                                <tr>
+                                    <th>
+                                        Start Time
+                                    </th>
+
+                                    <th>
+                                        End Time
+                                    </th>
+
+                                    <th>
+                                        Monday
+                                    </th>
+
+                                    <th>
+                                        Tuesday
+                                    </th>
+
+                                    <th>
+                                        Wednesday
+                                    </th>
+
+                                    <th>
+                                        Thursday
+                                    </th>
+
+                                    <th>
+                                        Friday
+                                    </th>
+
+                                    <th>
+                                        Saturday
+                                    </th>
+
+                                    <th>
+                                        Sunday
+                                    </th>
+                                </tr>
+                            </thead>
+
+                            <tbody class="text-center">
+                                <tr>
+                                    <td>
+                                        {{ doctorSchedule.startTime }}
+                                    </td>
+
+                                    <td>
+                                        {{ doctorSchedule.endTime }}
+                                    </td>
+
+                                    <td>
+                                        {{ doctorSchedule.monday ? 'YES' : 'NO'}}
+                                    </td>
+
+                                    <td>
+                                        {{ doctorSchedule.tuesday ? 'YES' : 'NO' }}
+                                    </td>
+
+                                    <td>
+                                        {{ doctorSchedule.wednesday ? 'YES' : 'NO'}}
+                                    </td>
+
+                                    <td>
+                                        {{ doctorSchedule.thursday ? 'YES' : 'NO'}}
+                                    </td>
+
+                                    <td>
+                                        {{ doctorSchedule.friday ? 'YES' : 'NO' }}
+                                    </td>
+
+                                    <td>
+                                        {{ doctorSchedule.saturday ? 'YES' : 'NO' }}
+                                    </td>
+
+                                    <td>
+                                        {{ doctorSchedule.sunday ? 'YES' : 'NO' }}
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
 
     <!--
     <br /><br /><br />
@@ -138,7 +237,7 @@
     </div>
 -->
 
-    <div class="add-appointment" *ngIf="isDoctorSelected" [@fadeInOnEnter] [@fadeOutRightOnLeave]>
+    <div class="add-appointment" *ngIf="isDoctorSelected && doctorSchedule.id" [@fadeInOnEnter] [@fadeOutRightOnLeave]>
         <h3 class="fw-bold"> Add appointment </h3>
         <hr>
         <form [formGroup]="appointmentForm" class="container w-75" (ngSubmit)="addAppointment()">
@@ -159,7 +258,8 @@
             </div>
 
             <div class="mb-3 text-center">
-                <button type="submit" class="btn btn-success">Save Appointment</button>
+                <button type="submit" class="btn btn-success" [disabled]="!appointmentForm.valid">Save
+                    Appointment</button>
             </div>
 
 
@@ -192,6 +292,12 @@
         </div>
     </ng-template>
 </div>
+
+<ng-template #noSchedule>
+    <div class="container" [@fadeInOnEnter]>
+        <h4 class="text-danger text-center">Schedule is not available.</h4>
+    </div>
+</ng-template>
 
 <ng-template #notLoggedIn>
     <div class="container container-data" [@fadeInOnEnter]>

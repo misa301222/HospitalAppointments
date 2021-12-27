@@ -1,0 +1,146 @@
+<div class="container container-data">
+    <div class="header">
+        <h1 class="fw-bold text-center">Edit Profile</h1>
+    </div>
+    <hr>
+
+    <div class="container d-flex flex-column align-items-center">
+        <div class="card w-75">
+            <div class="card-header">
+                <h6>Data</h6>
+            </div>
+            <div class="card-body">
+                <form [formGroup]="editProfileForm" (ngSubmit)="onSubmit()" class="form-about-me">
+                    <h6> Image </h6>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingInput" placeholder="ImageLink"
+                            autocomplete="off" formControlName="imageURL">
+                        <label for="floatingInput">Image Link</label>
+                    </div>
+
+                    <h6> Contact </h6>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingInput" placeholder="location"
+                            autocomplete="off" formControlName="location">
+                        <label for="floatingInput">Location</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingInput" placeholder="Phone"
+                            autocomplete="off" formControlName="phoneNumber">
+                        <label for="floatingInput">Phone Number</label>
+                    </div>
+
+
+                    <h6> Interests </h6>
+                    <div class="form-floating mb-3">
+                        <div class="row">
+                            <div class="col">
+                                <div class="container hobbies">
+                                    <table class="table table-dark table-bordered">
+                                        <thead class="text-center">
+                                            <tr>
+                                                <th>
+                                                    Hobby
+                                                </th>
+
+                                                <th>
+                                                    Actions
+                                                </th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody class="text-center">
+                                            <tr *ngFor="let hobby of aboutMe.hobbies">
+                                                <td>
+                                                    {{hobby}}
+                                                </td>
+
+                                                <td>
+                                                    <button class="btn btn-warning" (click)="editHobby(hobby)"
+                                                        type="button">Edit</button>
+                                                    <button class="btn btn-danger" (click)="deleteHobby(hobby)"
+                                                        type="button">Delete</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col d-flex align-items-center justify-content-center">
+                                <button class="btn btn-dark btn-outline-light" (click)="addHobby()" type="button">Add
+                                    Hobby</button>
+                            </div>
+                        </div>
+                    </div>
+                    <br><br>
+                    <h6> Education </h6>
+                    <div class="form-floating mb-3">
+                        <div class="row">
+                            <div class="col">
+                                <div class="container hobbies">
+                                    <table class="table table-dark table-bordered">
+                                        <thead class="text-center">
+                                            <tr>
+                                                <th>
+                                                    Education
+                                                </th>
+
+                                                <th>
+                                                    Actions
+                                                </th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody class="text-center">
+                                            <tr *ngFor="let education of aboutMe.education">
+                                                <td>
+                                                    {{education}}
+                                                </td>
+
+                                                <td>
+                                                    <button class="btn btn-warning" type="button"
+                                                        (click)="editEducation(education)">Edit</button>
+                                                    <button class="btn btn-danger" type="button"
+                                                        (click)="deleteEducation(education)">Delete</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col d-flex align-items-center justify-content-center">
+                                <button class="btn btn-dark btn-outline-light" (click)="addEducation()"
+                                    type="button">Add Education</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br><br>
+                    <h6> About me Section </h6>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingInput" placeholder="Phone"
+                            autocomplete="off" maxlength="50" formControlName="aboutMeHeader">
+                        <label for="floatingInput">About me (This will show a header)</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" rows="6"
+                            maxlength="350" formControlName="aboutMeDescription"
+                            value="{{aboutMe.description}}"></textarea>
+                        <label for="floatingInput">About me info(This is the description)</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" rows="6"
+                            maxlength="350" formControlName="aboutMeAditionalInfo"></textarea>
+                        <label for="floatingInput">Aditional Info</label>
+                    </div>
+
+                    <div class="form-floating mb-3 text-center">
+                        <button type="submit" class="btn btn-dark btn-outline-light">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -26,6 +26,14 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FlatpickrModule } from 'angularx-flatpickr';
+import { ShowDoctorsComponent } from './Components/doctors/show-doctors/show-doctors.component';
+import { MyAppointmentsComponent } from './Components/appointment/my-appointments/my-appointments.component';
+import { CreateUsersComponent } from './Components/users/create-users/create-users.component';
+import { ShowAboutMeComponent } from './Components/about-me/show-about-me/show-about-me.component';
+import { EditAboutMeComponent } from './Components/about-me/edit-about-me/edit-about-me.component';
+import { FaqComponent } from './Components/faq/faq.component';
+import { PageNotFoundComponent } from './Components/page-not-found/page-not-found.component';
+import { AboutThisAppComponent } from './Components/about-this-app/about-this-app.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +46,15 @@ import { FlatpickrModule } from 'angularx-flatpickr';
     ShowAppointmentComponent,
     ShowUsersComponent,
     AcceptAppointmentComponent,
-    MakeAppointmentComponent
+    MakeAppointmentComponent,
+    ShowDoctorsComponent,
+    MyAppointmentsComponent,
+    CreateUsersComponent,
+    ShowAboutMeComponent,
+    EditAboutMeComponent,
+    FaqComponent,
+    PageNotFoundComponent,
+    AboutThisAppComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

@@ -29,24 +29,11 @@ export class LoginComponent implements OnInit {
     let email = this.loginForm.controls['email'].value;
     let password = this.loginForm.controls['password'].value;
 
-    console.log(email);
-    console.log(password);
-
-
     await this.authService.loginEmailUser(email, password)
       .then((res) => {
         console.log(res);
         this.showSuccessLoginSwal();
       }).catch(err => console.log('err', err.message));
-
-
-    // await this.firebaseService.signIn(email, password).then(response => {
-    //   if (this.firebaseService.isLoggedIn) {
-    //     console.log('Logged in!');
-    //   }
-    // }).catch(err => {
-    //   console.log(err);
-    // });
   }
 
   showSuccessLoginSwal() {

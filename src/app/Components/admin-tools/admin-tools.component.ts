@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { faUserCog, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { fadeInOnEnterAnimation } from 'angular-animations';
 
 @Component({
@@ -8,6 +9,9 @@ import { fadeInOnEnterAnimation } from 'angular-animations';
   animations: [fadeInOnEnterAnimation()]
 })
 export class AdminToolsComponent implements OnInit {
+
+  faUsers = faUsers;
+  faUserCog = faUserCog;
 
   constructor() { }
 

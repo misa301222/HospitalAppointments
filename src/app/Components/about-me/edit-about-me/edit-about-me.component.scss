@@ -1,0 +1,16 @@
+.container-data{
+    .form-about-me {
+        textarea {
+            height:7em;
+            resize: none;
+        }
+
+        .hobbies {
+            height: 10em;
+            color: black;
+            // background-color: #9c9c9c;
+            overflow-y: auto;
+            border-radius: 13px;
+        }
+    }
+}

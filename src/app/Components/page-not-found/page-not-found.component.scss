@@ -1,0 +1,17 @@
+.container-data {
+    .banner {
+        background-color: gray;
+        .cat-image {
+            width: 30em;
+            background-color: rgb(255, 221, 221);
+        }
+        a {
+            color: white !important;
+            transition: all 0.2s ease-in;
+        }
+
+        a:hover {
+            color: rgb(202, 60, 60) !important;
+        }
+    }
+}

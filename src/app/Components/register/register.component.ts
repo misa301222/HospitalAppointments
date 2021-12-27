@@ -40,7 +40,7 @@ export class RegisterComponent implements OnInit {
         showConfirmButton: false,
         timer: 1000
       }).then(res => {
-        this.router.navigate(['login']);
+        this.router.navigate(['/home']);
       });
     }).catch(err => {
       console.log(err);

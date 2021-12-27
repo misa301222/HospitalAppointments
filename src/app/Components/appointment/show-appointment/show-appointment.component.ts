@@ -2,7 +2,9 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { faCalendar } from '@fortawesome/free-solid-svg-icons';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { fadeInOnEnterAnimation, rubberBandOnEnterAnimation } from 'angular-animations';
 import { AuthService } from 'src/app/Core/auth.service';
 import { Appointment } from 'src/app/Models/appointment';
 import { DoctorSchedule } from 'src/app/Models/doctorSchedule';
@@ -14,16 +16,16 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-show-appointment',
   templateUrl: './show-appointment.component.html',
-  styleUrls: ['./show-appointment.component.scss']
+  styleUrls: ['./show-appointment.component.scss'],
+  animations: [fadeInOnEnterAnimation(),
+  rubberBandOnEnterAnimation()]
 })
 export class ShowAppointmentComponent implements OnInit {
 
   constructor(private router: Router, private authService: AuthService, private appointmentService: AppointmentService,
-    private modalService: NgbModal, private formBuilder: FormBuilder, private doctorScheduleService: DoctorScheduleService, private userService: UserService) {
+    private modalService: NgbModal, private formBuilder: FormBuilder, private doctorScheduleService: DoctorScheduleService, private userService: UserService) { }
 
-
-  }
-
+  faCalendar = faCalendar;
   isUser: boolean = false;
   isDoctor: boolean = false;
   appointmentList: Appointment[] = [];
@@ -70,13 +72,14 @@ export class ShowAppointmentComponent implements OnInit {
 
           if (this.isDoctor) {
             this.doctorUid = auth.uid;
-            this.appointmentService.getDoctorByDoctorId(this.doctorUid).subscribe(querySnap => {
+            this.appointmentService.getAppointmentsByDoctorId(this.doctorUid).subscribe(querySnap => {
               querySnap.forEach((doc: any) => {
                 this.appointmentList.push({
                   id: doc.id,
-                  ...doc.data()
-                })
-                // console.log(doc);
+                  ...doc.data(),
+                  date: doc.data().date.toDate(),
+                });
+                console.log(doc.data());
               })
               console.log(this.appointmentList);
             });
@@ -127,11 +130,12 @@ export class ShowAppointmentComponent implements OnInit {
     let id = this.editFormAppointment.controls['id'].value;
     this.appointmentService.editAppointmentStatus(id, status).then(response => {
       this.appointmentList = [];
-      this.appointmentService.getDoctorByDoctorId(this.doctorUid).subscribe(querySnap => {
+      this.appointmentService.getAppointmentsByDoctorId(this.doctorUid).subscribe(querySnap => {
         querySnap.forEach((doc: any) => {
           this.appointmentList.push({
             id: doc.id,
-            ...doc.data()
+            ...doc.data(),
+            date: doc.data().date.toDate(),
           });
         });
       });
@@ -233,6 +237,46 @@ export class ShowAppointmentComponent implements OnInit {
       showConfirmButton: false,
       timer: 1000
     });
+  }
+
+  deleteAppointment(appointment: Appointment) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      console.log(appointment.id);
+
+      if (result.isConfirmed) {
+        if (appointment.id) {
+          this.appointmentService.getAppointmentByAppointmentId(appointment.id).subscribe(querySnap => {
+            querySnap.forEach((doc: any) => {
+              doc.ref.delete();
+            });
+            Swal.fire(
+              'Deleted!',
+              'Your file has been deleted.',
+              'success'
+            );
+            this.appointmentList = [];
+            this.appointmentService.getAppointmentsByDoctorId(this.doctorUid).subscribe(querySnap => {
+              querySnap.forEach((doc: any) => {
+                this.appointmentList.push({
+                  id: doc.id,
+                  ...doc.data(),
+                  date: doc.data().date.toDate(),
+                });
+              });
+            });
+          });
+        }
+      }
+    });
+
   }
 
 }

@@ -1,0 +1,139 @@
+<div class="container container-data" [@fadeInOnEnter]>
+    <div class="header">
+        <h5>Profile</h5>        
+        <button class="btn btn-dark btn-outline-light" (click)="editProfile()" *ngIf="isOwnProfile">Edit profile</button>
+        <hr>
+        <br>
+    </div>
+
+    <div class="doctor-info-container container">
+        <div class="doc-data">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="d-flex flex-column align-items-center">
+                        <img src="{{aboutMe.imageURL}}" alt="profileImage" class="image-thumbnail" *ngIf="aboutMe.imageURL" />
+                        <img src="././assets/resources/images/Blank.png" alt="profileImage" class="image-thumbnail" *ngIf="!aboutMe.imageURL" />
+                        <br>
+                        <h6 class="text-muted fw-bold fst-italic">{{ user.name }}</h6>
+                        <h6 class="text-muted fw-bold fst-italic">
+                            <fa-icon [icon]="faMapMarkerAlt"></fa-icon> {{ aboutMe.location }}
+                        </h6>
+                    </div>
+                </div>
+
+                <div class="col-sm-2"></div>
+
+                <div class="col">
+                    <div class="doctor-data">
+                        <div class="row mb-3">
+                            <div class="col-sm-1 text-center">
+                                <div class="icono">
+                                    <fa-icon [icon]="faGraduationCap"></fa-icon>
+                                </div>
+                            </div>
+                            <div class="col-sm-1"></div>
+                            <div class="col">
+                                <div class="row">
+                                    <h6 class="fw-bold"><u>Education</u></h6>
+                                </div>
+                                <div class="row">
+                                    <ul>
+                                        <li *ngFor="let education of aboutMe.education">
+                                            &mdash; {{ education }}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-1 text-center">
+                                <div class="icono-hobby">
+                                    <fa-icon [icon]="faGamepad"></fa-icon>
+                                </div>
+                            </div>
+                            <div class="col-sm-1"></div>
+                            <div class="col">
+                                <div class="row">
+                                    <h6 class="fw-bold"><u>Hobbies:</u></h6>
+                                </div>
+                                <div class="row">
+                                    <ul>
+                                        <li *ngFor="let hobby of aboutMe.hobbies">
+                                            &mdash; {{ hobby }}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-sm-1 text-center">
+                                <div class="icono-phone">
+                                    <fa-icon [icon]="faPhoneAlt"></fa-icon>
+                                </div>
+                            </div>
+                            <div class="col-sm-1"></div>
+                            <div class="col">
+                                <div class="row">
+                                    <h6 class="fw-bold"><u>Phone Number:</u></h6>
+                                </div>
+                                <div class="row">
+                                    <ul>
+                                        <li>
+                                            &mdash; {{ aboutMe.phoneNumber }}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-sm-1 text-center">
+                                <div class="icono-email">
+                                    <fa-icon [icon]="faEnvelopeOpenText"></fa-icon>
+                                </div>
+                            </div>
+                            <div class="col-sm-1"></div>
+                            <div class="col">
+                                <div class="row">
+                                    <h6 class="fw-bold"><u>Email:</u></h6>
+                                </div>
+                                <div class="row">
+                                    <ul>
+                                        <li>
+                                            &mdash; {{ user.email }}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br><br>
+    <div class="doctor-description container">
+        <div class="container doc-data">
+            <h3 class="text-center">{{ aboutMe.descriptionHeader }}</h3>
+            <hr>
+            <h6 class="fw-bold">About Me</h6>
+            <div>
+                <p>{{aboutMe.description}}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container d-flex flex-column align-items-center">
+        <div class="card shadow-card card-aditional-info" style="width: 18rem;">
+            <div class="card-header">
+                Aditional Info
+            </div>
+            <div class="card-body">
+                {{ aboutMe.aditionalInfo }}
+            </div>
+        </div>
+    </div>
+
+</div>

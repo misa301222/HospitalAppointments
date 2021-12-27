@@ -1,0 +1,64 @@
+<div class="container container-data" [@fadeInOnEnter]>
+    <div class="header">
+        <h1 class="fw-bold text-center"> Doctors <fa-icon [icon]="faStethoscope">
+            </fa-icon>
+        </h1>
+    </div>
+    <hr>
+
+    <div class="container-info">
+
+    </div>
+
+    <div class="container-doctors">
+        <div class="header">
+            <div class="header-image d-flex flex-row">
+                <img src="././assets/resources/images/Doctor2.png" alt="doctorPhoto" class="doctor-image shadow-lg" />
+                <div class="text">
+                    <br>
+                    <div class="container w-75 d-flex flex-column">
+                        <h3 class="text-center text-dark"><u>Doctors <fa-icon [icon]="faStethoscope" class="text-dark">
+                                </fa-icon></u></h3>
+                        <p class="fw-bold text-wrap text-dark">Here you can see a list of all the doctor we have
+                            currently in our page. By
+                            clicking in the name you can see their respective profile,
+                            where you can also find information about their education, hobbies and more info.
+                        </p>
+
+                        <p class="fw-bolder text-wrap text-dark">We really worry about your
+                            health, if
+                            you still have any
+                            question please check our <a [routerLink]="['/faq']">FAQ section</a> or
+                            send an email to Hospital@gmail.com
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="doctors-list">
+        <div class="container">
+            <h5 class="text-center fw-bold">Meet Our indredible Team <fa-icon [icon]="faUsers">
+            </fa-icon></h5>
+            <hr>
+            <ul>
+                <div class="d-flex align-items-center doctor-card" *ngFor="let doctor of doctorList; index as i">
+                    <div class="flex-shrink-0">
+                        <img src="{{aboutMeList[i].imageURL}}" alt="profileImage" class="thumbnail shadow-lg"
+                            *ngIf="aboutMeList[i]?.imageURL">
+                        <img src="././assets/resources/images/Blank.png" alt="profileImage" class="thumbnail shadow-lg"
+                            *ngIf="!aboutMeList[i]?.imageURL">
+                    </div>
+                    <div class="flex-grow-1 ms-3">
+                        <a [routerLink]="['/show-about-me/', {email : doctor.email}]">{{ doctor.name }} - [{{
+                            doctor.email
+                            }}]</a>
+                    </div>
+                </div>
+            </ul>
+        </div>
+    </div>
+
+</div>
