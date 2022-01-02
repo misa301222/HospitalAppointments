@@ -1,0 +1,10 @@
+.container-data {
+    .thumbnail {
+        width: 17em;
+        transition: 0.2s ease-in-out;
+    }
+
+    .thumbnail:hover {
+        transform: scale(1.1);
+    }
+}

@@ -5,12 +5,7 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: "AIzaSyDODX2LEhJeXpCQsxNs8WhrLNKdx2dfe5I",
-    authDomain: "hospital-appointments-fed70.firebaseapp.com",
-    projectId: "hospital-appointments-fed70",
-    storageBucket: "hospital-appointments-fed70.appspot.com",
-    messagingSenderId: "493585057614",
-    appId: "1:493585057614:web:506d3a81cdf8e817a8c01f"
+    //YOUR CONFIG
   }
 };
 
